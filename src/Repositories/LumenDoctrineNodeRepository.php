@@ -33,8 +33,8 @@ class LumenDoctrineNodeRepository extends DoctrineNodeRepository
     {
         $LumenDoctrineNode = $this->find($entity);
         $LumenDoctrineNode->setNodeType($LumenDoctrineNode->nodeType);
-        $this->_em->persist($LumenDoctrineNode);
-        $this->_em->flush();
+        $this->_em->merge($LumenDoctrineNode);
+//        $this->_em->flush();
         return $entity;
     }
 

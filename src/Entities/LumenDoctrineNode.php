@@ -18,7 +18,6 @@ use LaravelDoctrine\Extensions\IpTraceable\IpTraceable;
  *
  * @ORM\Entity
  * @ORM\MappedSuperclass
- * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @ORM\Entity(repositoryClass="Jkirkby91\LumenDoctrineComponent\Repositories\LumenDoctrineNodeRepository")
  * @ORM\Table(name="node", indexes={@ORM\Index(name="search_idx", columns={"id","node_type"})})
