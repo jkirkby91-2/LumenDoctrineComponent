@@ -11,7 +11,6 @@ use Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineNode;
  */
 class LumenDoctrineNodeRepository extends DoctrineNodeRepository
 {
-
     /**
      * @param array|\Jkirkby91\Boilers\NodeEntityBoiler\EntityContract|\Psr\Http\Message\ServerRequestInterface $entity
      * @return $LumenDoctrineNode
