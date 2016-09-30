@@ -2,7 +2,7 @@
 
 namespace Jkirkby91\LumenDoctrineComponent\Entities;
 
-use App\Entities\BarberShop;
+use App\Entities\LocalBusiness;
 use App\Jobs\IndexNewEntitiesJob;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -47,25 +47,24 @@ abstract class LumenDoctrineEntity extends \Jkirkby91\DoctrineNodeEntity\Doctrin
         }
     }
 
-//    /**
-//     * @ORM\PrePersist
-//     * @param $event
-//     */
-//    public function prePersist($event)
-//    {
-//        $entity = $event->getEntity();
-//        if (!$entity instanceof \Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineNode)
-//        {
-//            $lumenNode  = app()->make('em')->getRepository('Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineNode')->create($entity);
-//            $this->setNid($lumenNode->getId());
-//        }
-//    }
-//
-//    /**
-//     * @ORM\PreUpdate
-//     */
-//    public function preUpdate()
-//    {
-//        $node = app()->make('em')->getRepository('Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineEntity')->update($this->getNid(),[]);
-//    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(LifecycleEventArgs $event)
+    {
+        $entity = $event->getEntity();
+        if (!$entity instanceof \Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineNode)
+        {
+            $lumenNode  = app()->make('em')->getRepository('Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineNode')->create($entity);
+            $this->setNid($lumenNode->getId());
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $node = app()->make('em')->getRepository('Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineEntity')->update($this->getNid(),[]);
+    }
 }

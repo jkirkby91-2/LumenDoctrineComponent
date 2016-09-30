@@ -3,6 +3,7 @@
 namespace Jkirkby91\LumenDoctrineComponent\Repositories;
 
 use Jkirkby91\DoctrineRepositories\DoctrineRepository;
+use Jkirkby91\Boilers\NodeEntityBoiler\EntityContract AS Entity;
 
 /**
  * Class LumenDoctrineEntityRepository
@@ -10,13 +11,34 @@ use Jkirkby91\DoctrineRepositories\DoctrineRepository;
  */
 class LumenDoctrineEntityRepository extends DoctrineRepository
 {
+
+    /**
+     * @return mixed
+     */
+    public function store(Entity $entity)
+    {
+        $this->_em->persist($entity);
+        $this->_em->flush();
+        return $entity;
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @return bool
+     * @TODO
+     */
+    public function update(Entity $entity,$id)
+    {
+        //@TODO implement
+        return false;
+    }
+
     /**
      * @param $entity
      * @return mixed
      */
     public function createNode($entity)
     {
-        $lumenNode = app()->make('em')->getRepository('Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineNode')->create($entity);
-        return $lumenNode;
+        return app()->make('em')->getRepository('Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineNode')->create($entity);
     }
 }
