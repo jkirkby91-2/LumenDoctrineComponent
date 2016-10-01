@@ -2,7 +2,6 @@
 
 namespace Jkirkby91\LumenDoctrineComponent\Entities;
 
-use App\Entities\LocalBusiness;
 use App\Jobs\IndexNewEntitiesJob;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -13,6 +12,8 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
  * @package Jkirkby91\LumenDoctrineComponent\Entities
  * @author James Kirkby <jkirkby91@gmail.com>
  * @ORM\MappedSuperclass
+ *
+ * @TODO Move app specific jobs out of a shared library
  */
 abstract class LumenDoctrineEntity extends \Jkirkby91\DoctrineNodeEntity\DoctrineEntity
 {
@@ -31,7 +32,7 @@ abstract class LumenDoctrineEntity extends \Jkirkby91\DoctrineNodeEntity\Doctrin
     public function postUpdateHandler(LifecycleEventArgs $event)
     {
         $entity = $event->getEntity();
-        if($entity instanceof BarberShop)
+        if($entity instanceof \App\Entities\LocalBusiness)
         {
             dispatch(new UpdateIndexEntitiesJob($entity));
         }
@@ -41,7 +42,7 @@ abstract class LumenDoctrineEntity extends \Jkirkby91\DoctrineNodeEntity\Doctrin
     public function postRemoveHandler(LifecycleEventArgs $event)
     {
         $entity = $event->getEntity();
-        if($entity instanceof BarberShop)
+        if($entity instanceof \App\Entities\LocalBusiness)
         {
             dispatch(new DeleteIndexEntitiesJob($entity));
         }
@@ -63,8 +64,14 @@ abstract class LumenDoctrineEntity extends \Jkirkby91\DoctrineNodeEntity\Doctrin
     /**
      * @ORM\PreUpdate
      */
-    public function preUpdate()
+    public function preUpdate(LifecycleEventArgs $event)
     {
-        $node = app()->make('em')->getRepository('Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineEntity')->update($this->getNid(),[]);
+//        $entity = $event->getEntity();
+//        $node = app()->make('em')->getRepository('Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineEntity')->update($this->getNid(),[]);
+//
+//        if($entity instanceof \App\Entities\AggregateRating)
+//        {
+//            dd('trace123');
+//        }
     }
 }
