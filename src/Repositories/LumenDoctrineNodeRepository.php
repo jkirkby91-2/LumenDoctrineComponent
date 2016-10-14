@@ -8,7 +8,9 @@ use Jkirkby91\Boilers\NodeEntityBoiler\EntityContract AS Entity;
 
 /**
  * Class LumenDoctrineRepository
+ *
  * @package Jkirkby91\LumenDoctrineComponent\Repositories
+ * @author James Kirkby <jkirkby91@gmail.com>
  */
 class LumenDoctrineNodeRepository extends DoctrineNodeRepository
 {
@@ -34,7 +36,6 @@ class LumenDoctrineNodeRepository extends DoctrineNodeRepository
         $LumenDoctrineNode = $this->find($entity);
         $LumenDoctrineNode->setNodeType($LumenDoctrineNode->nodeType);
         $this->_em->merge($LumenDoctrineNode);
-//        $this->_em->flush();
         return $entity;
     }
 
