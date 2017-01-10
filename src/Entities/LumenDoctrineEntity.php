@@ -2,7 +2,6 @@
 
 namespace Jkirkby91\LumenDoctrineComponent\Entities;
 
-use App\Jobs\IndexNewEntitiesJob;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
@@ -21,10 +20,11 @@ abstract class LumenDoctrineEntity extends \Jkirkby91\DoctrineNodeEntity\Doctrin
     /** @ORM\PostPersist */
     public function postPersistHandler(LifecycleEventArgs $event)
     {
+        //@TODO WHY ARE YOU DOING BUSINESS LOGIC IN A GENERIC LIBRARY JAMES????????
         $entity = $event->getEntity();
-        if($entity instanceof LumenDoctrineEntity)
+        if($entity instanceof \App\Entities\LocalBusiness)
         {
-            dispatch(new IndexNewEntitiesJob($entity));
+            dispatch(new \App\Jobs\IndexNewEntitiesJob($entity));
         }
     }
 
@@ -34,7 +34,7 @@ abstract class LumenDoctrineEntity extends \Jkirkby91\DoctrineNodeEntity\Doctrin
         $entity = $event->getEntity();
         if($entity instanceof \App\Entities\LocalBusiness)
         {
-            dispatch(new UpdateIndexEntitiesJob($entity));
+            dispatch(new \App\Jobs\UpdateIndexEntitiesJob($entity));
         }
     }
 
