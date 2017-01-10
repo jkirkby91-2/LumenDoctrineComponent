@@ -1,5 +1,5 @@
 {
-    "name": "jkirkby91/LumenDoctrineComponent",
+    "name": "jkirkby91/lumendoctrinecomponent",
     "autoload": {
         "psr-4": {
             "Jkirkby91\\LumenDoctrineComponent\\": "src/"
