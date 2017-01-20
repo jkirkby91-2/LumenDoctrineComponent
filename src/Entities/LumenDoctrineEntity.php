@@ -11,42 +11,9 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
  * @package Jkirkby91\LumenDoctrineComponent\Entities
  * @author James Kirkby <jkirkby91@gmail.com>
  * @ORM\MappedSuperclass
- *
- * @TODO Move app specific jobs out of a shared library
  */
 abstract class LumenDoctrineEntity extends \Jkirkby91\DoctrineNodeEntity\DoctrineEntity
 {
-
-    /** @ORM\PostPersist */
-    public function postPersistHandler(LifecycleEventArgs $event)
-    {
-        //@TODO WHY ARE YOU DOING BUSINESS LOGIC IN A GENERIC LIBRARY JAMES????????
-        $entity = $event->getEntity();
-        if($entity instanceof \App\Entities\LocalBusiness)
-        {
-            dispatch(new \App\Jobs\IndexNewEntitiesJob($entity));
-        }
-    }
-
-    /** @ORM\PostUpdate */
-    public function postUpdateHandler(LifecycleEventArgs $event)
-    {
-        $entity = $event->getEntity();
-        if($entity instanceof \App\Entities\LocalBusiness)
-        {
-            dispatch(new \App\Jobs\UpdateIndexEntitiesJob($entity));
-        }
-    }
-
-    /** @ORM\PostRemove */
-    public function postRemoveHandler(LifecycleEventArgs $event)
-    {
-        $entity = $event->getEntity();
-        if($entity instanceof \App\Entities\LocalBusiness)
-        {
-            dispatch(new DeleteIndexEntitiesJob($entity));
-        }
-    }
 
     /**
      * @ORM\PrePersist
