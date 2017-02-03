@@ -31,14 +31,5 @@ abstract class LumenDoctrineEntity extends \Jkirkby91\DoctrineNodeEntity\Doctrin
     /**
      * @ORM\PreUpdate
      */
-    public function preUpdate(LifecycleEventArgs $event)
-    {
-//        $entity = $event->getEntity();
-//        $node = app()->make('em')->getRepository('Jkirkby91\LumenDoctrineComponent\Entities\LumenDoctrineEntity')->update($this->getNid(),[]);
-//
-//        if($entity instanceof \App\Entities\AggregateRating)
-//        {
-//            dd('trace123');
-//        }
-    }
+    // public function preUpdate(LifecycleEventArgs $event){}
 }

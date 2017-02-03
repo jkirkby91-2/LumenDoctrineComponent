@@ -16,9 +16,8 @@ class LumenDoctrineServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function register()
     {
-        //@TODO $this->registerConfig()
+        $this->registerConfig();
         $this->registerServiceProviders();
-
     }
 
     /**
@@ -27,6 +26,11 @@ class LumenDoctrineServiceProvider extends \Illuminate\Support\ServiceProvider
      * @return void
      */
     public function boot(){}
+
+    public function registerConfig()
+    {
+        $this->app->configure('lumendoctrine');
+    }
 
     /**
      * Register service providers
@@ -42,8 +46,9 @@ class LumenDoctrineServiceProvider extends \Illuminate\Support\ServiceProvider
         //load the doctrine repository boiler
         $this->app->register(\Jkirkby91\LumenDoctrineComponent\Providers\NodeRepositoryServiceProvider::class);
 
-        //@TODO check env if dev load
-        //$this->app->register(\LaravelDoctrine\Migrations\MigrationsServiceProvider::class);
+        // if(getenv('APP_ENV') === 'local') {
+        //     $this->app->register(\LaravelDoctrine\Migrations\MigrationsServiceProvider::class);
+        // }
 
         //load ACL
         $this->app->register(\LaravelDoctrine\ACL\AclServiceProvider::class);
