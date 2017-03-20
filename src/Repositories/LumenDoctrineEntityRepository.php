@@ -5,7 +5,7 @@ namespace Jkirkby91\LumenDoctrineComponent\Repositories;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Jkirkby91\DoctrineRepositories\DoctrineRepository;
-
+use Doctrine\Common\Collections\Criteria;
 /**
  * Class LumenDoctrineEntityRepository
  *

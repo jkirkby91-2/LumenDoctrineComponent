@@ -46,9 +46,9 @@ class LumenDoctrineServiceProvider extends \Illuminate\Support\ServiceProvider
         //load the doctrine repository boiler
         $this->app->register(\Jkirkby91\LumenDoctrineComponent\Providers\NodeRepositoryServiceProvider::class);
 
-        // if(getenv('APP_ENV') === 'local') {
-        //     $this->app->register(\LaravelDoctrine\Migrations\MigrationsServiceProvider::class);
-        // }
+        if(getenv('APP_ENV') === 'local') {
+            $this->app->register(\LaravelDoctrine\Migrations\MigrationsServiceProvider::class);
+        }
 
         //load ACL
         $this->app->register(\LaravelDoctrine\ACL\AclServiceProvider::class);
