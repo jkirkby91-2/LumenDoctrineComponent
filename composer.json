@@ -17,10 +17,6 @@
     },
     "require-dev": {
         "phpunit/phpunit": "4.*",
-        "jkirkby91/schemaboilers": "dev-master",
-        "jkirkby91/NodeEntityBoiler": "dev-master",
-        "jkirkby91/RepositoryBoiler": "dev-master",
-        "jkirkby91/RestServerBoiler": "dev-master",
         "laravel-doctrine/migrations":"1.0.*"
     },
     "autoload-dev": {
