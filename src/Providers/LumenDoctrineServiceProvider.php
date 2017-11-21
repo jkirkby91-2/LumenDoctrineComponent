@@ -37,11 +37,11 @@ class LumenDoctrineServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function registerServiceProviders()
     {
-        //load laraveldoctrine service provider
-        $this->app->register(\LaravelDoctrine\ORM\DoctrineServiceProvider::class);
-
         //load gedmo extensions
         $this->app->register(\LaravelDoctrine\Extensions\GedmoExtensionsServiceProvider::class);
+
+        //load laraveldoctrine service provider
+        $this->app->register(\LaravelDoctrine\ORM\DoctrineServiceProvider::class);
 
         //load the doctrine repository boiler
         $this->app->register(\Jkirkby91\LumenDoctrineComponent\Providers\NodeRepositoryServiceProvider::class);

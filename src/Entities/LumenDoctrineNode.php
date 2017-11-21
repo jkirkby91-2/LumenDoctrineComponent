@@ -20,7 +20,7 @@ use LaravelDoctrine\Extensions\IpTraceable\IpTraceable;
  * @ORM\MappedSuperclass
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @ORM\Entity(repositoryClass="Jkirkby91\LumenDoctrineComponent\Repositories\LumenDoctrineNodeRepository")
- * @ORM\Table(name="node", indexes={@ORM\Index(name="search_idx", columns={"id","node_type"})})
+ * @ORM\Table(name="node", indexes={@ORM\Index(name="node_search_idx", columns={"id","node_type"})})
  */
 final class LumenDoctrineNode extends \Jkirkby91\DoctrineNodeEntity\DoctrineNode
 {
