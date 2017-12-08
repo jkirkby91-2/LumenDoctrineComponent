@@ -1,59 +1,68 @@
 <?php
+	declare(strict_types=1);
 
-namespace Jkirkby91\LumenDoctrineComponent\Providers;
+	namespace Jkirkby91\LumenDoctrineComponent\Providers {
 
-/**
- * Class DoctrineServiceProvider
- * @package JJkirkby91\LaravelDoctrineBoiler\Providers
- * //@TODO register config
- */
-class LumenDoctrineServiceProvider extends \Illuminate\Support\ServiceProvider
-{
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->registerConfig();
-        $this->registerServiceProviders();
-    }
+		use Illuminate\{
+			Support\ServiceProvider
+		};
 
-    /**
-     * Boot the authentication services for the application.
-     *
-     * @return void
-     */
-    public function boot(){}
+		/**
+		 * Class LumenDoctrineServiceProvider
+		 *
+		 * @package Jkirkby91\LumenDoctrineComponent\Providers
+		 * @author  James Kirkby <jkirkby@protonmail.ch>
+		 *
+		 * @TODO register config
+		 */
+		class LumenDoctrineServiceProvider extends ServiceProvider
+		{
+			/**
+			 * Register any application services.
+			 *
+			 * @return void
+			 */
+			public function register()
+			{
+				$this->registerConfig();
+				$this->registerServiceProviders();
+			}
 
-    public function registerConfig()
-    {
-        $this->app->configure('lumendoctrine');
-    }
+			/**
+			 * Boot the authentication services for the application.
+			 *
+			 * @return void
+			 */
+			public function boot(){}
 
-    /**
-     * Register service providers
-     */
-    public function registerServiceProviders()
-    {
-        //load laraveldoctrine service provider
-        $this->app->register(\LaravelDoctrine\ORM\DoctrineServiceProvider::class);
+			public function registerConfig()
+			{
+				$this->app->configure('lumendoctrine');
+			}
 
-        //load gedmo extensions
-        $this->app->register(\LaravelDoctrine\Extensions\GedmoExtensionsServiceProvider::class);
+			/**
+			 * Register service providers
+			 */
+			public function registerServiceProviders()
+			{
+				//load gedmo extensions
+				$this->app->register(\LaravelDoctrine\Extensions\GedmoExtensionsServiceProvider::class);
 
-        //load the doctrine repository boiler
-        $this->app->register(\Jkirkby91\LumenDoctrineComponent\Providers\NodeRepositoryServiceProvider::class);
+				//load laraveldoctrine service provider
+				$this->app->register(\LaravelDoctrine\ORM\DoctrineServiceProvider::class);
 
-        if(getenv('APP_ENV') === 'local') {
-            $this->app->register(\LaravelDoctrine\Migrations\MigrationsServiceProvider::class);
-        }
+				//load the doctrine repository boiler
+				$this->app->register(\Jkirkby91\LumenDoctrineComponent\Providers\LumenDoctrineNodeRepositoryServiceProvider::class);
 
-        //load ACL
-        $this->app->register(\LaravelDoctrine\ACL\AclServiceProvider::class);
+				if(getenv('APP_ENV') === 'local') {
+					$this->app->register(\LaravelDoctrine\Migrations\MigrationsServiceProvider::class);
+				}
 
-        //load password reset service provider
-        $this->app->register(\LaravelDoctrine\ORM\Auth\Passwords\PasswordResetServiceProvider::class);
-    }
-}
+				//load ACL
+				$this->app->register(\LaravelDoctrine\ACL\AclServiceProvider::class);
+
+				//load password reset service provider
+				$this->app->register(\LaravelDoctrine\ORM\Auth\Passwords\PasswordResetServiceProvider::class);
+			}
+		}
+	}
